@@ -4,4 +4,17 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="AutoMapper\" />
+    <Folder Include="Implementations\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ShoppingWebApp.Data.EF\ShoppingWebApp.Data.EF.csproj" />
+    <ProjectReference Include="..\ShoppingWebApp.Data\ShoppingWebApp.Data.csproj" />
+    <ProjectReference Include="..\ShoppingWebApp.Utilities\ShoppingWebApp.Utilities.csproj" />
+  </ItemGroup>
+
 </Project>

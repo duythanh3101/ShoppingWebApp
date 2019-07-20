@@ -4,4 +4,14 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Respositories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ShoppingWebApp.Data\ShoppingWebApp.Data.csproj" />
+    <ProjectReference Include="..\ShoppingWebApp.Infrastructure\ShoppingWebApp.Infrastructure.csproj" />
+    <ProjectReference Include="..\ShoppingWebApp.Utilities\ShoppingWebApp.Utilities.csproj" />
+  </ItemGroup>
+
 </Project>
