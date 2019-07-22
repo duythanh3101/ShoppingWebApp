@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ShoppingWebApp.Data.Entities
+namespace ShoppingWebApp.Data.EF
 {
-    public class Language
+    public class EFUnitOfWork
     {
     }
 }

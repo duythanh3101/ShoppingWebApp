@@ -16,7 +16,7 @@ namespace ShoppingWebApp.Data.Entities
     {
         public Product()
         {
-           // ProductTags = new List<ProductTag>();
+           ProductTags = new List<ProductTag>();
         }
 
         [StringLength(255)]
@@ -58,7 +58,7 @@ namespace ShoppingWebApp.Data.Entities
         [ForeignKey("CategoryId")]
         public virtual ProductCategory ProductCategory { set; get; }
 
-        //public virtual ICollection<ProductTag> ProductTags { set; get; }
+        public virtual ICollection<ProductTag> ProductTags { set; get; }
 
         public Status Status { get; set; }
 

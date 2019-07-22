@@ -1,10 +1,19 @@
-﻿    using System;
+﻿using ShoppingWebApp.Infrastructure.SharedKernel;
 using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ShoppingWebApp.Data.Entities
 {
-    class AdvertisementPage
+    [Table("AdvertisementPages")]
+    public class AdvertisementPage : BaseEntity<string>
     {
+        public AdvertisementPage()
+        {
+            AdvertisementPositions = new List<AdvertisementPosition>();
+        }
+
+        public string Name { get; set; }
+
+        public virtual ICollection<AdvertisementPosition> AdvertisementPositions { get; set; }
     }
 }

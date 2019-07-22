@@ -1,10 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ShoppingWebApp.Data.Enums;
+using ShoppingWebApp.Data.Interfaces;
+using ShoppingWebApp.Infrastructure.SharedKernel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ShoppingWebApp.Data.Entities
 {
-    class ProductImage
+    [Table("ProductImages")]
+    public class ProductImage : BaseEntity<string>, ISwitchable
     {
+        [Required]
+        [StringLength(128)]
+        public string Name { get; set; }
+
+        public bool IsDefault { get; set; }
+
+        public string Resources { get; set; }
+
+        public Status Status { get; set; }
+        
     }
 }
