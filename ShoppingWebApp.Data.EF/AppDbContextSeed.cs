@@ -1,4 +1,5 @@
-﻿using ShoppingWebApp.Data.Entities;
+﻿using Microsoft.AspNetCore.Identity;
+using ShoppingWebApp.Data.Entities;
 using ShoppingWebApp.Data.Enums;
 using ShoppingWebApp.Utilities.Constants;
 using System;
@@ -12,14 +13,55 @@ namespace ShoppingWebApp.Data.EF
     public class AppDbContextSeed
     {
         private readonly AppDbContext _context;
-
-        public AppDbContextSeed(AppDbContext context)
+        private UserManager<AppUser> _userManager;
+        private RoleManager<AppRole> _roleManager;
+        public AppDbContextSeed(AppDbContext context, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
         {
             _context = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public async Task Seed()
         {
+            if (!_roleManager.Roles.Any())
+            {
+                await _roleManager.CreateAsync(new AppRole()
+                {
+                    Name = "Admin",
+                    NormalizedName = "Admin",
+                    Description = "Top manager"
+                });
+                await _roleManager.CreateAsync(new AppRole()
+                {
+                    Name = "Staff",
+                    NormalizedName = "Staff",
+                    Description = "Staff"
+                });
+                await _roleManager.CreateAsync(new AppRole()
+                {
+                    Name = "Customer",
+                    NormalizedName = "Customer",
+                    Description = "Customer"
+                });
+            }
+            if (!_userManager.Users.Any())
+            {
+                AppUser u = new AppUser()
+                {
+                    UserName = "admin",
+                    FullName = "Administrator",
+                    Email = "admin@gmail.com",
+                    Balance = 0,
+                    DateCreated = DateTime.Now,
+                    DateModified = DateTime.Now,
+                    Status = Status.Active
+                };
+                var res = await _userManager.CreateAsync(u, "123654");
+                var user = await _userManager.FindByNameAsync("admin");
+                await _userManager.AddToRoleAsync(user, "Admin");
+            }
+
             if (!_context.Contacts.Any())
             {
                 _context.Contacts.AddRange(GetPreconfiguredContacts());

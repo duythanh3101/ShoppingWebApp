@@ -17,7 +17,7 @@ namespace ShoppingWebApp.Data.EF
 {
     public class AppDbContext: IdentityDbContext<AppUser, AppRole, Guid>
     {
-        public AppDbContext()
+        public AppDbContext(DbContextOptions options) : base(options)
         {
         }
         public DbSet<Language> Languages { set; get; }
@@ -58,18 +58,15 @@ namespace ShoppingWebApp.Data.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Cach 1
-            //Config attribute tag 
-            modelBuilder.AddConfiguration(new TagConfiguration());
-
-            //Cach 2
             #region Identity Config
-            modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims").HasKey(x => x.Id);
+            modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims")
+                .HasKey(x => x.Id);
 
             modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims")
                 .HasKey(x => x.Id);
 
-            modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
+            modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins")
+                .HasKey(x => x.UserId);
 
             modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles")
                 .HasKey(x => new { x.RoleId, x.UserId });
@@ -78,10 +75,23 @@ namespace ShoppingWebApp.Data.EF
                .HasKey(x => new { x.UserId });
             #endregion
 
-            //Cach 3
+            //Cach 1
+            //Configure attribute 
+            modelBuilder.AddConfiguration(new TagConfiguration());
+            modelBuilder.AddConfiguration(new ProductTagConfiguration());
+            modelBuilder.AddConfiguration(new PageConfiguration());
+            modelBuilder.AddConfiguration(new FunctionConfiguration());
+            modelBuilder.AddConfiguration(new FooterConfiguration());
+            modelBuilder.AddConfiguration(new ContactDetailConfiguration());
+            modelBuilder.AddConfiguration(new AdvertisementPageConfiguration());
+            modelBuilder.AddConfiguration(new BlogTagConfiguration());
+            modelBuilder.AddConfiguration(new AdvertisementPositionConfiguration());
+
+           
+            //Cach 2
             modelBuilder.Entity<Product>(ConfigureProduct);
 
-            base.OnModelCreating(modelBuilder);
+            //base.OnModelCreating(modelBuilder);
         }
 
         private void ConfigureProduct(EntityTypeBuilder<Product> obj)

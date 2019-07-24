@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ShoppingWebApp.Data.Entities
 {
-    [Table("Permission")]
+    [Table("Permissions")]
     public class Permission: BaseEntity<int>
     {
         [Required]
