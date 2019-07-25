@@ -69,8 +69,10 @@ namespace ShoppingWebApp
             services.AddTransient<AppDbContextSeed>();
 
             //Add auto mapper
-            services.AddSingleton(Mapper.Configuration);
-            services.AddScoped<IMapper>(sp => new Mapper(sp.GetRequiredService<AutoMapper.IConfigurationProvider>(), sp.GetService));
+            var config = AutoMapperConfiguration.RegisterMappings();
+            services.AddSingleton(config);
+            //services.AddSingleton(Mapper.Configuration);
+            //services.AddScoped<IMapper>(sp => new Mapper(sp.GetRequiredService<AutoMapper.IConfigurationProvider>(), sp.GetService));
 
             //Add Repository
             services.AddTransient(typeof(IUnitOfWork), typeof(EFUnitOfWork));
@@ -104,6 +106,9 @@ namespace ShoppingWebApp
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(
+                    name: "areaRoute",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
             });
 
             var builder = new ConfigurationBuilder()
