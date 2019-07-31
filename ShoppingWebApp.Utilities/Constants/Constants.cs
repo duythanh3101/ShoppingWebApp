@@ -14,5 +14,9 @@ namespace ShoppingWebApp.Utilities.Constants
 
         public const string ProductTag = "Product";
         public const string BlogTag = "Blog";
+
+        public const string AdminRole = "Admin";
+
+
     }
 }

@@ -1,0 +1,58 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "gentelella@1.4.0",
+      "destination": "wwwroot/lib/gentelella/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "nprogress@0.2.0",
+      "destination": "wwwroot/lib/nprogress/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "bootstrap-daterangepicker@3.0.5",
+      "destination": "wwwroot/lib/bootstrap-daterangepicker/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "fastclick@1.0.6",
+      "destination": "wwwroot/lib/fastclick/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "Chart.js@2.8.0",
+      "destination": "wwwroot/lib/Chart.js/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "jquery-sparklines@2.1.2",
+      "destination": "wwwroot/lib/jquery-sparklines/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "flot@0.8.3",
+      "destination": "wwwroot/lib/flot/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "datejs@1.0",
+      "destination": "wwwroot/lib/datejs/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "moment.js@2.24.0",
+      "destination": "wwwroot/lib/moment.js/"
+    },
+    {
+      "library": "notify@0.4.2",
+      "destination": "wwwroot/lib/notify/"
+    },
+    {
+      "library": "bootbox.js@4.4.0",
+      "destination": "wwwroot/lib/bootbox.js/"
+    }
+  ]
+}

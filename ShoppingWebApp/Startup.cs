@@ -17,6 +17,10 @@ using ShoppingWebApp.Data.Entities;
 using AutoMapper;
 using ShoppingWebApp.Application.AutoMapper;
 using ShoppingWebApp.Infrastructure.Interfaces;
+using Newtonsoft.Json.Serialization;
+using ShoppingWebApp.Helpers;
+using ShoppingWebApp.Application.Interfaces;
+using ShoppingWebApp.Application.Implementations;
 
 namespace ShoppingWebApp
 {
@@ -40,7 +44,8 @@ namespace ShoppingWebApp
             });
 
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), 
+                o => o.MigrationsAssembly("ShoppingWebApp.Data.EF")));
             services.AddIdentity<AppUser, AppRole>()
                 .AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
@@ -66,19 +71,31 @@ namespace ShoppingWebApp
             services.AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
             services.AddScoped<RoleManager<AppRole>, RoleManager<AppRole>>();
 
-            services.AddTransient<AppDbContextSeed>();
+            services.AddScoped<IUserClaimsPrincipalFactory<AppUser>, CustomClaimsPrincipalFactory>();
+
 
             //Add auto mapper
             var config = AutoMapperConfiguration.RegisterMappings();
-            services.AddSingleton(config);
+            //services.AddSingleton(config);
             //services.AddSingleton(Mapper.Configuration);
             //services.AddScoped<IMapper>(sp => new Mapper(sp.GetRequiredService<AutoMapper.IConfigurationProvider>(), sp.GetService));
+            IMapper mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
+
+            services.AddTransient<AppDbContextSeed>();
 
             //Add Repository
             services.AddTransient(typeof(IUnitOfWork), typeof(EFUnitOfWork));
             services.AddTransient(typeof(IAsyncRepository<,>), typeof(EFRepository<,>));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc()
+                .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver())
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            //Services
+            services.AddTransient<IProductCategoryService, ProductCategoryService>();
+            services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IFunctionService, FunctionService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -107,15 +124,18 @@ namespace ShoppingWebApp
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
                 routes.MapRoute(
-                    name: "areaRoute",
+                    name: "defaults",
                     template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(name: "areaRoute",
+                  template: "{area:exists}/{controller=Login}/{action=Index}/{id?}");
+
             });
 
-            var builder = new ConfigurationBuilder()
-               .SetBasePath(env.ContentRootPath)
-               .AddJsonFile("appsettings.json", optional: true,
-                reloadOnChange: true)
-               .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+            //var builder = new ConfigurationBuilder()
+            //   .SetBasePath(env.ContentRootPath)
+            //   .AddJsonFile("appsettings.json", optional: true,
+            //    reloadOnChange: true)
+            //   .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
         }
     }
 }

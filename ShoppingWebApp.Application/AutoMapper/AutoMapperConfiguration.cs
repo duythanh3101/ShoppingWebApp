@@ -12,7 +12,7 @@ namespace ShoppingWebApp.Application.AutoMapper
             return new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new DomainToViewModelAutoMapper());
-                cfg.AddProfile(new ViewModelToEntityAutoMapper());
+                cfg.AddProfile(new ViewModelToDomainAutoMapper());
             });
         }
     }

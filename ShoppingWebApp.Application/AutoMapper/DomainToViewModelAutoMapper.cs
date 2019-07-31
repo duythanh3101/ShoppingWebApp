@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ShoppingWebApp.Application.ViewModels.Product;
+using ShoppingWebApp.Application.ViewModels.System;
 using ShoppingWebApp.Data.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace ShoppingWebApp.Application.AutoMapper
         public DomainToViewModelAutoMapper()
         {
             CreateMap<ProductCategory, ProductCategoryViewModel>();
+            CreateMap<Function, FunctionViewModel>();
+            CreateMap<Product, ProductViewModel>();
         }
     }
 }
