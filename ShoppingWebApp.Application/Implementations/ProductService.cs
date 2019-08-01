@@ -1,22 +1,27 @@
-﻿using ShoppingWebApp.Application.Interfaces;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using ShoppingWebApp.Application.Interfaces;
 using ShoppingWebApp.Application.ViewModels.Product;
 using ShoppingWebApp.Data.Entities;
 using ShoppingWebApp.Infrastructure.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ShoppingWebApp.Application.Implementations
 {
     public class ProductService: IProductService
     {
-        IAsyncRepository<Product, string> _productRepository;
+        IAsyncRepository<Product, int> _productRepository;
         IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public ProductService(IAsyncRepository<Product, string> productRepository, IUnitOfWork unitOfWork)
+        public ProductService(IAsyncRepository<Product, int> productRepository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _productRepository = productRepository;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public ProductViewModel Add(ProductViewModel product)
@@ -31,7 +36,8 @@ namespace ShoppingWebApp.Application.Implementations
 
         public List<ProductViewModel> GetAll()
         {
-            throw new NotImplementedException();
+            var lst = _productRepository.FindAll(x=>x.ProductCategory).ProjectTo<ProductViewModel>(_mapper.ConfigurationProvider).ToList();
+            return lst;
         }
 
         public ProductViewModel GetById(int id)

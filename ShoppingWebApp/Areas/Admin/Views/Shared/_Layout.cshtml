@@ -10,16 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gentelella Alela! | </title>
     <!-- Bootstrap -->
-    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/admin-side/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Font Awesome -->
-    <link href="~/admin-side/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/admin-side/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <!-- NProgress -->
-    <link href="~/admin-side/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="~/lib/nprogress/nprogress.css" rel="stylesheet">
     <!-- bootstrap-daterangepicker -->
-    <link href="~/admin-side/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="~/lib/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="~/lib/gentelella/css/custom.min.css" rel="stylesheet" />
-
 
     <link href="~/lib/notify/styles/metro/notify-metro.min.css" rel="stylesheet" />
 </head>
@@ -31,6 +30,7 @@
                     <div class="navbar nav_title" style="border: 0;">
                         <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
                     </div>
+                    
                     <div class="clearfix"></div>
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
@@ -58,7 +58,7 @@
                         <a data-toggle="tooltip" data-placement="top" title="Lock">
                             <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                         </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" asp-area="" asp-action="Logout" asp-controller="Account">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                         </a>
                     </div>
@@ -74,21 +74,7 @@
                         </div>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
-                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="~/admin-side/images/img.jpg" alt="">@User.GetSpecificClaim("FullName")
-                                    <span class=" fa fa-angle-down"></span>
-                                </a>
-                                <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li><a href="javascript:;"> Profile</a></li>
-                                    <li>
-                                        <a href="javascript:;">
-                                            <span class="badge bg-red pull-right">50%</span>
-                                            <span>Settings</span>
-                                        </a>
-                                    </li>
-                                    <li><a href="javascript:;">Help</a></li>
-                                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                                </ul>
+                                @await Html.PartialAsync("_LoginPartial")
                             </li>
                             <li role="presentation" class="dropdown">
                                 <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
@@ -112,12 +98,13 @@
                                         <a>
                                             <span class="image"><img src="~/admin-side/images/img.jpg" alt="Profile Image" /></span>
                                             <span>
-                                                <span>@User.GetSpecificClaim("FullName")/span>
-                                                <span class="time">3 mins ago</span>
-                                            </span>
-                                            <span class="message">
-                                                Film festivals used to be do-or-die moments for movie makers. They were where...
-                                            </span>
+                                                <span>
+                                                    @User.GetSpecificClaim("FullName")/span>
+                                                    <span class="time">3 mins ago</span>
+                                                </span>
+                                                <span class="message">
+                                                    Film festivals used to be do-or-die moments for movie makers. They were where...
+                                                </span>
                                         </a>
                                     </li>
                                     <li>
@@ -177,27 +164,27 @@
         </div>
     </div>
     <!-- jQuery -->
-    <script src="~/admin-side/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="~/admin-side/jquery/dist/jquery.js"></script>
     <!-- Bootstrap -->
-    <script src="~/admin-side/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
-    <script src="~/admin-side/vendors/fastclick/lib/fastclick.js"></script>
+    @*<script src="~/lib/fastclick/lib/fastclick.js"></script>*@
     <!-- NProgress -->
-    <script src="~/admin-side/vendors/nprogress/nprogress.js"></script>
+    <script src="~/lib/nprogress/nprogress.js"></script>
     <!-- Chart.js -->
-    <script src="~/admin-side/vendors/Chart.js/dist/Chart.min.js"></script>
+    @*<script src="~/lib/Chart.js/dist/Chart.min.js"></script>*@
     <!-- jQuery Sparklines -->
-    <script src="~/admin-side/vendors/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+    @*<script src="~/lib/jquery-sparkline/dist/jquery.sparkline.min.js"></script>*@
     <!-- Flot -->
-    @*<script src="~/admin-side/vendors/Flot/jquery.flot.js"></script>
-        <script src="~/admin-side/vendors/Flot/jquery.flot.pie.js"></script>
-        <script src="~/admin-side/vendors/Flot/jquery.flot.time.js"></script>
-        <script src="~/admin-side/vendors/Flot/jquery.flot.stack.js"></script>
-        <script src="~/admin-side/vendors/Flot/jquery.flot.resize.js"></script>*@
+    @*<script src="~/lib/Flot/jquery.flot.js"></script>
+        <script src="~/lib/Flot/jquery.flot.pie.js"></script>
+        <script src="~/lib/Flot/jquery.flot.time.js"></script>
+        <script src="~/lib/Flot/jquery.flot.stack.js"></script>
+        <script src="~/lib/Flot/jquery.flot.resize.js"></script>*@
     <!-- Flot plugins -->
-    @*<script src="~/admin-side/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-        <script src="~/admin-side/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-        <script src="~/admin-side/vendors/flot.curvedlines/curvedLines.js"></script>*@
+    @*<script src="~/lib/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+        <script src="~/lib/flot-spline/js/jquery.flot.spline.min.js"></script>
+        <script src="~/lib/flot.curvedlines/curvedLines.js"></script>*@
     <!-- DateJS -->
     <script src="~/lib/datejs/date.min.js"></script>
     <!-- bootstrap-daterangepicker -->
@@ -207,7 +194,6 @@
     <script src="~/lib/notify/notify.min.js"></script>
     <script src="~/lib/notify/styles/metro/notify-metro.min.js"></script>
     <script src="~/lib/bootbox.js/bootbox.min.js"></script>
-
 
     <script src="~/app/shared/utilities.js"></script>
     <!-- Custom Theme Scripts -->
