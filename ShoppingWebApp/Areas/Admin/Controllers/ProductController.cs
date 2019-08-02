@@ -19,7 +19,20 @@ namespace ShoppingWebApp.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            return View(_productService.GetAll().ToList());
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var products = _productService.GetAll();
+            return new OkObjectResult(products);
+        }
+        [HttpGet]
+        public IActionResult GetAllPaging(int? categoryId, string keyword, int page, int pageSize)
+        {
+            var model = _productService.GetAllPaging(categoryId, keyword, page, pageSize);
+            return new OkObjectResult(model);
         }
     }
 }

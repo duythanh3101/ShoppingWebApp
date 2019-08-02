@@ -1,5 +1,5 @@
 ﻿var utilities = {
-    config: {
+    configs: {
         pageSize: 10,
         pageIndex: 1
     },
