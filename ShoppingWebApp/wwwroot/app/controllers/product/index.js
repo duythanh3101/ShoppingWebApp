@@ -1,5 +1,6 @@
 ﻿var productController =  function () {
-    this.initialize =  function () {
+    this.initialize = function () {
+        loadCategories();
         loadData();
         registerEvents();
     };
@@ -14,6 +15,33 @@
         $('#btnSearch').on('click', function () {
             loadData();
         });
+
+        $('#txtKeyword').keypress(function (e) {
+            if (e.which === 13) {
+                loadData();
+            }
+        });
+
+    };
+
+
+    var loadCategories = function () {
+        var render = '<option value="">' + '-- Select Cateory --' + '</option>';
+        $.ajax({
+            type: 'GET',
+            url: '/Admin/Product/GetAllCategories',
+            dataType: 'json',
+            success: function (response) {
+                $.each(response, function (i, item) {
+                    render += '<option value="' + item.Id + '">' + item.Name + '</option>';
+                });
+                $('#ddlSelectedCategory').html(render);
+            },
+            error: function (status) {
+                console.log(status);
+                utilities.notify('Cannot loading product categories data', 'error');
+            }
+        });
     };
 
     var loadData = function (isPageChanged) {
@@ -22,7 +50,7 @@
         $.ajax({
             type: 'GET',
             data: {
-                categoryId: null,
+                categoryId: $('#ddlSelectedCategory').val(),
                 keyword: $('#txtKeyword').val(),
                 page: utilities.configs.pageIndex,
                 pageSize: utilities.configs.pageSize
@@ -30,18 +58,24 @@
             url: '/Admin/Product/GetAllPaging',
             dataType: 'json',
             success: function (response) {
-                $.each(response.Results, function (i, item) {
-                    render += Mustache.render(template, {
-                        Id: item.Id,
-                        Name: item.Name,
-                        Image: item.Image === null ? '<img src="/admin-side/images/user.png" width=40' : '<img src="' + item.Image + '" width=60 height=60/>',
-                        CategoryName: item.ProductCategory.Name,
-                        Price: utilities.formatNumber(item.Price, 0),
-                        CreatedDate: utilities.dateTimeFormatJson(item.DateCreated),
-                        Status: utilities.getStatus(item.Status)
+                if (response.RowCount > 0) {
+                    $.each(response.Results, function (i, item) {
+                        render += Mustache.render(template, {
+                            Id: item.Id,
+                            Name: item.Name,
+                            Image: item.Image === null ? '<img src="/admin-side/images/user.png" width=40' : '<img src="' + item.Image + '" width=60 height=60/>',
+                            CategoryName: item.ProductCategory.Name,
+                            Price: utilities.formatNumber(item.Price, 0),
+                            CreatedDate: utilities.dateTimeFormatJson(item.DateCreated),
+                            Status: utilities.getStatus(item.Status)
+                        });
+
                     });
-                  
-                });
+                }
+                else {
+                    render = '<h3>Không có sản phẩm nào</h3>';
+                }
+                
                 $('#lblTotalRecords').text(response.RowCount);
                 if (render !== '') {
                     $('#tblContent').html(render);

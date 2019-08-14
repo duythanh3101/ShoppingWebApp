@@ -11,10 +11,12 @@ namespace ShoppingWebApp.Areas.Admin.Controllers
     public class ProductController : BaseController
     {
         IProductService _productService;
+        IProductCategoryService _productCategoryService;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, IProductCategoryService productCategoryService)
         {
             _productService = productService;
+            _productCategoryService = productCategoryService;
         }
 
         public IActionResult Index()
@@ -28,6 +30,14 @@ namespace ShoppingWebApp.Areas.Admin.Controllers
             var products = _productService.GetAll();
             return new OkObjectResult(products);
         }
+
+        [HttpGet]
+        public IActionResult GetAllCategories()
+        {
+            var productCategories = _productCategoryService.GetAll();
+            return new OkObjectResult(productCategories);
+        }
+
         [HttpGet]
         public IActionResult GetAllPaging(int? categoryId, string keyword, int page, int pageSize)
         {

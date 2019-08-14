@@ -88,5 +88,6 @@ namespace ShoppingWebApp.Application.Implementations
             };
             return pagedResult;
         }
+
     }
 }
