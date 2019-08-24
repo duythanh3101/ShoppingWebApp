@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ShoppingWebApp.Data.Entities
 {
+    [Table("ProductTags")]
     public class ProductTag: BaseEntity<int>
     {
         public int ProductId { get; set; }

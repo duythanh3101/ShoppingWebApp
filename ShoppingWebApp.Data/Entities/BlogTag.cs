@@ -1,10 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ShoppingWebApp.Infrastructure.SharedKernel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ShoppingWebApp.Data.Entities
 {
-    class BlogTag
+    [Table("BlogTags")]
+    public class BlogTag: BaseEntity<int>
     {
+        public int BlogId { set; get; }
+
+        public string TagId { set; get; }
+
+        [ForeignKey("BlogId")]
+        public virtual Blog Blog { set; get; }
+
+        [ForeignKey("TagId")]
+        public virtual Tag Tag { set; get; }
     }
 }
