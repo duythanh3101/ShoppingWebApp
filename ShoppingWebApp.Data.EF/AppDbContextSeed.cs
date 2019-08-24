@@ -47,17 +47,17 @@ namespace ShoppingWebApp.Data.EF
             }
             if (!_userManager.Users.Any())
             {
-                AppUser u = new AppUser()
+                AppUser newUser = new AppUser()
                 {
                     UserName = "admin",
-                    FullName = "Administrator",
+                    FullName = "Duy Thanh",
                     Email = "admin@gmail.com",
                     Balance = 0,
                     DateCreated = DateTime.Now,
                     DateModified = DateTime.Now,
                     Status = Status.Active
                 };
-                var res = await _userManager.CreateAsync(u, "123654");
+                var res = await _userManager.CreateAsync(newUser, "123456");
                 var user = await _userManager.FindByNameAsync("admin");
                 await _userManager.AddToRoleAsync(user, "Admin");
             }
