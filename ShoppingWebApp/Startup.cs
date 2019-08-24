@@ -21,6 +21,7 @@ using Newtonsoft.Json.Serialization;
 using ShoppingWebApp.Helpers;
 using ShoppingWebApp.Application.Interfaces;
 using ShoppingWebApp.Application.Implementations;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace ShoppingWebApp
 {
@@ -72,6 +73,7 @@ namespace ShoppingWebApp
             // Add application services.
             services.AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
             services.AddScoped<RoleManager<AppRole>, RoleManager<AppRole>>();
+            //services.AddTransient<IEmailSender, EmailSender>()
 
             services.AddScoped<IUserClaimsPrincipalFactory<AppUser>, CustomClaimsPrincipalFactory>();
 

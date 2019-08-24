@@ -208,4 +208,9 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Services\" />
+    <Folder Include="wwwroot\lib\jquery-easyui\" />
+  </ItemGroup>
+
 </Project>
