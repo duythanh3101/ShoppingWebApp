@@ -15,7 +15,6 @@ namespace ShoppingWebApp.Areas.Admin.Controllers
     [Area("Admin")]
     public class LoginController : Controller
     {
-
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ILogger _logger;

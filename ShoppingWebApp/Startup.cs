@@ -66,6 +66,8 @@ namespace ShoppingWebApp
                 // User settings
                 options.User.RequireUniqueEmail = true;
             });
+            //Change authorize redirect url when not login
+            services.ConfigureApplicationCookie(options => options.LoginPath = "/Admin/Login/Index");
 
             // Add application services.
             services.AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
@@ -128,7 +130,6 @@ namespace ShoppingWebApp
                     template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                 routes.MapRoute(name: "areaRoute",
                   template: "{area:exists}/{controller=Login}/{action=Index}/{id?}");
-
             });
 
             //var builder = new ConfigurationBuilder()
