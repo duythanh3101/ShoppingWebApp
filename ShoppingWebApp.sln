@@ -3,17 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.645
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingWebApp", "ShoppingWebApp\ShoppingWebApp.csproj", "{DB4B5063-66D5-425D-BD06-DEEDCD830831}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoppingWebApp", "ShoppingWebApp\ShoppingWebApp.csproj", "{DB4B5063-66D5-425D-BD06-DEEDCD830831}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingWebApp.Data", "ShoppingWebApp.Data\ShoppingWebApp.Data.csproj", "{F618FC32-504A-49EC-85C2-52522277B880}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoppingWebApp.Data", "ShoppingWebApp.Data\ShoppingWebApp.Data.csproj", "{F618FC32-504A-49EC-85C2-52522277B880}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingWebApp.Application", "ShoppingWebApp.Application\ShoppingWebApp.Application.csproj", "{304E93B4-84D0-48EC-957E-704B2644B011}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoppingWebApp.Application", "ShoppingWebApp.Application\ShoppingWebApp.Application.csproj", "{304E93B4-84D0-48EC-957E-704B2644B011}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingWebApp.Data.EF", "ShoppingWebApp.Data.EF\ShoppingWebApp.Data.EF.csproj", "{F116DBD7-F286-44F8-8733-AF66556BB73F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoppingWebApp.Data.EF", "ShoppingWebApp.Data.EF\ShoppingWebApp.Data.EF.csproj", "{F116DBD7-F286-44F8-8733-AF66556BB73F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingWebApp.Infrastructure", "ShoppingWebApp.Infrastructure\ShoppingWebApp.Infrastructure.csproj", "{CA76EF06-851C-4765-9C04-AA2A3CCD9E21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoppingWebApp.Infrastructure", "ShoppingWebApp.Infrastructure\ShoppingWebApp.Infrastructure.csproj", "{CA76EF06-851C-4765-9C04-AA2A3CCD9E21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingWebApp.Utilities", "ShoppingWebApp.Utilities\ShoppingWebApp.Utilities.csproj", "{89FA67DC-7B6E-4FDC-BA39-2BEA0DB58B04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoppingWebApp.Utilities", "ShoppingWebApp.Utilities\ShoppingWebApp.Utilities.csproj", "{89FA67DC-7B6E-4FDC-BA39-2BEA0DB58B04}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Presentation", "1 - Presentation", "{83F2C447-2E3F-4152-8C83-8BCCE0CB3599}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Application", "2 - Application", "{8C8FCB79-7A18-41B7-8E11-E9BE22ED3669}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Domain", "3 - Domain", "{808EB130-3FF7-4149-B75C-3DCBE7E8A0FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infrastucture", "4 - Infrastucture", "{ABE97885-4489-4B54-8C18-580217486380}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +56,14 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DB4B5063-66D5-425D-BD06-DEEDCD830831} = {83F2C447-2E3F-4152-8C83-8BCCE0CB3599}
+		{F618FC32-504A-49EC-85C2-52522277B880} = {808EB130-3FF7-4149-B75C-3DCBE7E8A0FA}
+		{304E93B4-84D0-48EC-957E-704B2644B011} = {8C8FCB79-7A18-41B7-8E11-E9BE22ED3669}
+		{F116DBD7-F286-44F8-8733-AF66556BB73F} = {808EB130-3FF7-4149-B75C-3DCBE7E8A0FA}
+		{CA76EF06-851C-4765-9C04-AA2A3CCD9E21} = {ABE97885-4489-4B54-8C18-580217486380}
+		{89FA67DC-7B6E-4FDC-BA39-2BEA0DB58B04} = {ABE97885-4489-4B54-8C18-580217486380}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4B2C2F3A-2264-4D2C-8957-6EDD41A93450}
