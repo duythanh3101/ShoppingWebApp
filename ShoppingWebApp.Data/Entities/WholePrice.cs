@@ -13,6 +13,7 @@ namespace ShoppingWebApp.Data.Entities
 
         public int ToQuantity { get; set; }
 
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
 
         [ForeignKey("ProductId")]

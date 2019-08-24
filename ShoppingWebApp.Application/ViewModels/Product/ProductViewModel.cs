@@ -1,23 +1,14 @@
 ﻿using ShoppingWebApp.Data.Enums;
-using ShoppingWebApp.Data.Interfaces;
-using ShoppingWebApp.Infrastructure.SharedKernel;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
-namespace ShoppingWebApp.Data.Entities
+namespace ShoppingWebApp.Application.ViewModels.Product
 {
-    [Table("Products")]
-    public class Product : BaseEntity<int>,
-        IDateTracking, IHasSeoMetaData, ISwitchable
+    public class ProductViewModel
     {
-        public Product()
-        {
-           ProductTags = new List<ProductTag>();
-        }
+        public int Id { get; set; }
 
         [StringLength(255)]
         [Required]
@@ -58,10 +49,7 @@ namespace ShoppingWebApp.Data.Entities
         [StringLength(255)]
         public string Unit { get; set; }
 
-        [ForeignKey("CategoryId")]
-        public virtual ProductCategory ProductCategory { set; get; }
-
-        public virtual ICollection<ProductTag> ProductTags { set; get; }
+        public ProductCategoryViewModel ProductCategoryViewModel { set; get; }
 
         public Status Status { get; set; }
 

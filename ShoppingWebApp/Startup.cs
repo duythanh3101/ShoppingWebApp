@@ -14,6 +14,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ShoppingWebApp.Data.EF;
 using ShoppingWebApp.Data.Entities;
+using AutoMapper;
+using ShoppingWebApp.Application.AutoMapper;
+using ShoppingWebApp.Infrastructure.Interfaces;
 
 namespace ShoppingWebApp
 {
@@ -39,7 +42,39 @@ namespace ShoppingWebApp
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<AppUser, AppRole>()
-                .AddEntityFrameworkStores<AppDbContext>();
+                .AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
+            // Configure Identity
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+
+                // Lockout settings
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+
+                // User settings
+                options.User.RequireUniqueEmail = true;
+            });
+
+            // Add application services.
+            services.AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
+            services.AddScoped<RoleManager<AppRole>, RoleManager<AppRole>>();
+
+            services.AddTransient<AppDbContextSeed>();
+
+            //Add auto mapper
+            services.AddSingleton(Mapper.Configuration);
+            services.AddScoped<IMapper>(sp => new Mapper(sp.GetRequiredService<AutoMapper.IConfigurationProvider>(), sp.GetService));
+
+            //Add Repository
+            services.AddTransient(typeof(IUnitOfWork), typeof(EFUnitOfWork));
+            services.AddTransient(typeof(IAsyncRepository<,>), typeof(EFRepository<,>));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -70,6 +105,12 @@ namespace ShoppingWebApp
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            var builder = new ConfigurationBuilder()
+               .SetBasePath(env.ContentRootPath)
+               .AddJsonFile("appsettings.json", optional: true,
+                reloadOnChange: true)
+               .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
         }
     }
 }
