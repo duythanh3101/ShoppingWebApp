@@ -1,10 +1,26 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using ShoppingWebApp.Data.Enums;
+using ShoppingWebApp.Data.Interfaces;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace ShoppingWebApp.Data.Entities
 {
-    class AppUser
+    [Table("AppUsers")]
+    public class AppUser: IdentityUser<Guid>, IDateTracking, ISwitchable
     {
+        public string FullName { get; set; }
+
+        public DateTime? BirthDate { set; get; }
+
+        public decimal Balance { get; set; }
+
+        public string Avatar { get; set; }
+
+        public DateTime DateCreated { get; set; }
+        public DateTime DateModified { get; set; }
+        public Status Status { get; set; }
     }
 }

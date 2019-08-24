@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ShoppingWebApp.Data.Entities
 {
-    class Page
+    [Table("Pages")]
+    public class Page
     {
     }
 }

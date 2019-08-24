@@ -1,11 +1,10 @@
 ﻿using ShoppingWebApp.Infrastructure.SharedKernel;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ShoppingWebApp.Data.Entities
 {
+    [Table("Tags")]
     public class Tag: BaseEntity<string>
     {
         [MaxLength(50)]

@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ShoppingWebApp.Infrastructure.SharedKernel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ShoppingWebApp.Data.Entities
 {
-    class Footer
+    [Table("Footers")]
+    public class Footer : BaseEntity<string>
     {
+        [Required]
+        public string Content { set; get; }
     }
 }

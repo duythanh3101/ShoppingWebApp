@@ -5,13 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Respositories\" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ShoppingWebApp.Data\ShoppingWebApp.Data.csproj" />
     <ProjectReference Include="..\ShoppingWebApp.Infrastructure\ShoppingWebApp.Infrastructure.csproj" />
     <ProjectReference Include="..\ShoppingWebApp.Utilities\ShoppingWebApp.Utilities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Respositories\" />
   </ItemGroup>
 
 </Project>
