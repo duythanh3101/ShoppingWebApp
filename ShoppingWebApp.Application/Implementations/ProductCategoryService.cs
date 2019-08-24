@@ -15,12 +15,13 @@ namespace ShoppingWebApp.Application.Implementations
     {
         IAsyncRepository<ProductCategory, int> _productCategoryRepository;
         IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public ProductCategoryService(IAsyncRepository<ProductCategory, int> productCategoryRepository,
-                                    IUnitOfWork unitOfWork)
+        public ProductCategoryService(IAsyncRepository<ProductCategory, int> productCategoryRepository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _productCategoryRepository = productCategoryRepository;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public ProductCategoryViewModel Add(ProductCategoryViewModel productCategoryVm)
@@ -38,7 +39,7 @@ namespace ShoppingWebApp.Application.Implementations
         public List<ProductCategoryViewModel> GetAll()
         {
             return _productCategoryRepository.FindAll().OrderBy(x => x.ParentId)
-                 .ProjectTo<ProductCategoryViewModel>().ToList();
+                 .ProjectTo<ProductCategoryViewModel>(_mapper.ConfigurationProvider).ToList();
         }
 
         public List<ProductCategoryViewModel> GetAll(string keyword)
@@ -46,7 +47,7 @@ namespace ShoppingWebApp.Application.Implementations
             if (!string.IsNullOrEmpty(keyword))
                 return _productCategoryRepository.FindAll(x => x.Name.Contains(keyword)
                 || x.Description.Contains(keyword))
-                    .OrderBy(x => x.ParentId).ProjectTo<ProductCategoryViewModel>().ToList();
+                    .OrderBy(x => x.ParentId).ProjectTo<ProductCategoryViewModel>(_mapper.ConfigurationProvider).ToList();
             else
                 return GetAll();
         }
@@ -54,7 +55,7 @@ namespace ShoppingWebApp.Application.Implementations
         public List<ProductCategoryViewModel> GetAllByParentId(int parentId)
         {
             return _productCategoryRepository.FindAll(x => x.ParentId == parentId && x.Status == Status.Active)
-                .ProjectTo<ProductCategoryViewModel>().ToList();
+                .ProjectTo<ProductCategoryViewModel>(_mapper.ConfigurationProvider).ToList();
         }
 
         public ProductCategoryViewModel GetById(int id)
@@ -72,9 +73,19 @@ namespace ShoppingWebApp.Application.Implementations
         {
             var source = _productCategoryRepository.FindById(sourceId);
             var target = _productCategoryRepository.FindById(targetId);
-            int tempOrder = source.SortOrder;
-            source.SortOrder = target.SortOrder;
-            target.SortOrder = tempOrder;
+            if (source.SortOrder != target.SortOrder)
+            {
+                int tempOrder = source.SortOrder;
+                source.SortOrder = target.SortOrder;
+                target.SortOrder = tempOrder;
+            }
+            else
+            {
+
+            }
+            
+
+            source.ParentId = target.ParentId;
 
             _productCategoryRepository.Update(source);
             _productCategoryRepository.Update(target);
