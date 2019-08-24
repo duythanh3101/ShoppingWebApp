@@ -7,9 +7,9 @@ using System.Text;
 
 namespace ShoppingWebApp.Application.AutoMapper
 {
-    public class EntityToViewModelAutoMapper : Profile
+    public class DomainToViewModelAutoMapper : Profile
     {
-        public EntityToViewModelAutoMapper()
+        public DomainToViewModelAutoMapper()
         {
             CreateMap<ProductCategory, ProductCategoryViewModel>();
         }
