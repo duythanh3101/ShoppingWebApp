@@ -53,10 +53,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\app\controllers\product\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\admin-side\bootstrap\CHANGELOG.md" />
     <None Include="wwwroot\admin-side\bootstrap\dist\css\bootstrap-theme.css.map" />
     <None Include="wwwroot\admin-side\bootstrap\dist\css\bootstrap-theme.min.css.map" />

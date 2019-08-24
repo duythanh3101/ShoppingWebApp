@@ -1,7 +1,6 @@
 ﻿using ShoppingWebApp.Application.ViewModels.Product;
-using System;
+using ShoppingWebApp.Utilities.DTOs;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ShoppingWebApp.Application.Interfaces
 {
@@ -9,7 +8,7 @@ namespace ShoppingWebApp.Application.Interfaces
     {
         List<ProductViewModel> GetAll();
 
-        //PagedResult<ProductViewModel> GetAllPaging(int? categoryId, string keyword, int page, int pageSize);
+        PagedResult<ProductViewModel> GetAllPaging(int? categoryId, string keyword, int page, int pageSize);
 
         ProductViewModel Add(ProductViewModel product);
 
