@@ -2,7 +2,14 @@
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-@section Scripts{ 
+@section Styles{
+    <link href="~/lib/jquery-easyui/easyui.css" rel="stylesheet" />
+    <link href="~/lib/jquery-easyui/icon.css" rel="stylesheet" />
+
+}
+
+@section Scripts{
+    <script src="~/lib/jquery-easyui/jquery.easyui.min.js"></script>
     <script src="~/app/controllers/product/index.js"></script>
     <script>
         var product = new productController();
@@ -24,11 +31,17 @@
         </div>
 
         <div class="col-md-5 col-xs-12 form-group pull-right">
-            <select class="form-control" id="ddlSelectedCategory" >
+            <select class="form-control" id="ddlSelectedCategory">
                 <option value="">--Select category--</option>
             </select>
         </div>
-       
+        <div class="col-md-6 col-sm-12  form-group pull-right">
+            <button id="btnCreate" class="btn btn-success">Create</button>
+            @*<a class="btn btn-danger" href="~/templates/ProductImportTemplate.xlsx">Template</a>
+                <button class="btn btn-primary" id="btn-import" type="button"><i class="fa fa-file-excel-o"></i></button>
+                <button class="btn btn-default" id="btn-export" type="button"><i class="fa fa-forward"></i></button>*@
+        </div>
+
     </div>
 </div>
 <div class="clearfix"></div>
@@ -101,8 +114,8 @@
 <script id="tableTemplate" type="x-tmpl-mustache">
     <tr>
         <th>
-            <a class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a>
-            <a class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+            <a class="btn btn-success btn-sm btn-edit" data-id="{{Id}}"><i class="fa fa-pencil"></i></a>
+            <a class="btn btn-danger btn-sm btn-delete" data-id="{{Id}}"><i class="fa fa-trash"></i></a>
         </th>
         <th>{{Name}}</th>
         <td>{{CategoryName}}</td>
@@ -112,3 +125,5 @@
         <td>{{{Status}}}</td>
     </tr>
 </script>
+
+@await Html.PartialAsync("_AddEditModal.cshtml")
