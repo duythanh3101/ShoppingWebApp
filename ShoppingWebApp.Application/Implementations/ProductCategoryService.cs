@@ -26,7 +26,7 @@ namespace ShoppingWebApp.Application.Implementations
 
         public ProductCategoryViewModel Add(ProductCategoryViewModel productCategoryVm)
         {
-            var productCategory = Mapper.Map<ProductCategoryViewModel, ProductCategory>(productCategoryVm);
+           var productCategory = _mapper.Map<ProductCategoryViewModel, ProductCategory>(productCategoryVm);
             _productCategoryRepository.Add(productCategory);
             return productCategoryVm;
         }
@@ -60,7 +60,8 @@ namespace ShoppingWebApp.Application.Implementations
 
         public ProductCategoryViewModel GetById(int id)
         {
-            return Mapper.Map<ProductCategory, ProductCategoryViewModel>(_productCategoryRepository.FindById(id));
+            var productCategory = _productCategoryRepository.FindById(id);
+            return _mapper.Map<ProductCategory, ProductCategoryViewModel>(productCategory);
 
         }
 
@@ -98,7 +99,7 @@ namespace ShoppingWebApp.Application.Implementations
 
         public void Update(ProductCategoryViewModel productCategoryVm)
         {
-            _productCategoryRepository.Update(Mapper.Map<ProductCategoryViewModel, ProductCategory>(productCategoryVm));
+            _productCategoryRepository.Update(_mapper.Map<ProductCategoryViewModel, ProductCategory>(productCategoryVm));
         }
 
         public void UpdateParentId(int sourceId, int targetId, Dictionary<int, int> items)

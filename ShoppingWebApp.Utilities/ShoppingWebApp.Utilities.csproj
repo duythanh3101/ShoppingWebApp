@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Helpers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ShoppingWebApp.Infrastructure\ShoppingWebApp.Infrastructure.csproj" />
   </ItemGroup>
 

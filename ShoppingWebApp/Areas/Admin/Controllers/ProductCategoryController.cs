@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using ShoppingWebApp.Application.Interfaces;
+using ShoppingWebApp.Application.ViewModels.Product;
+using ShoppingWebApp.Utilities.Helpers;
 
 namespace ShoppingWebApp.Areas.Admin.Controllers
 {
@@ -72,6 +75,53 @@ namespace ShoppingWebApp.Areas.Admin.Controllers
             }
         }
 
+        [HttpPost]
+        public IActionResult SaveEntity(ProductCategoryViewModel productVm)
+        {
+            if (!ModelState.IsValid)
+            {
+                IEnumerable<ModelError> allErrors = ModelState.Values.SelectMany(v => v.Errors);
+                return new BadRequestObjectResult(allErrors);
+            }
+            else
+            {
+                productVm.SeoAlias = TextHelper.ToUnsignString(productVm.Name);
+                if (productVm.Id == 0)
+                {
+                    _productCategoryService.Add(productVm);
+                }
+                else
+                {
+                    _productCategoryService.Update(productVm);
+                }
+                _productCategoryService.Save();
+                return new OkObjectResult(productVm);
+
+            }
+        }
+
+        [HttpGet]
+        public IActionResult GetById(int id)
+        {
+            var model = _productCategoryService.GetById(id);
+
+            return new ObjectResult(model);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            if (id == 0)
+            {
+                return new BadRequestResult();
+            }
+            else
+            {
+                _productCategoryService.Delete(id);
+                _productCategoryService.Save();
+                return new OkObjectResult(id);
+            }
+        }
 
     }
 }
