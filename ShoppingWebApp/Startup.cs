@@ -81,11 +81,11 @@ namespace ShoppingWebApp
             //Add auto mapper
             var config = AutoMapperConfiguration.RegisterMappings();
             //services.AddSingleton(config);
-            //services.AddSingleton(Mapper.Configuration);
+            //services.AddSingleton(Mapper.ConfigurationProvider);
             //services.AddScoped<IMapper>(sp => new Mapper(sp.GetRequiredService<AutoMapper.IConfigurationProvider>(), sp.GetService));
             IMapper mapper = config.CreateMapper();
             services.AddSingleton(mapper);
-
+            
             services.AddTransient<AppDbContextSeed>();
 
             //Add Repository
@@ -95,7 +95,7 @@ namespace ShoppingWebApp
             services.AddMvc()
                 .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver())
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+            
             //Services
             services.AddTransient<IProductCategoryService, ProductCategoryService>();
             services.AddTransient<IProductService, ProductService>();

@@ -99,5 +99,29 @@ namespace ShoppingWebApp.Areas.Admin.Controllers
 
             }
         }
+
+        [HttpGet]
+        public IActionResult GetById(int id)
+        {
+            var model = _productCategoryService.GetById(id);
+
+            return new ObjectResult(model);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            if (id == 0)
+            {
+                return new BadRequestResult();
+            }
+            else
+            {
+                _productCategoryService.Delete(id);
+                _productCategoryService.Save();
+                return new OkObjectResult(id);
+            }
+        }
+
     }
 }

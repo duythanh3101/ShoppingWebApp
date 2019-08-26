@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ShoppingWebApp.Utilities.Helpers
 {
@@ -33,6 +34,7 @@ namespace ShoppingWebApp.Utilities.Helpers
             }
             return str2;
         }
+
         public static string ToString(decimal number)
         {
             string s = number.ToString("#");
@@ -106,7 +108,7 @@ namespace ShoppingWebApp.Utilities.Helpers
                 }
             }
             if (booAm) str = "Âm " + str;
-            return str + "đồng chẵn";
+            return str.Substring(0, str.Length - 1) + "đồng chẵn";
         }
     }
 }
