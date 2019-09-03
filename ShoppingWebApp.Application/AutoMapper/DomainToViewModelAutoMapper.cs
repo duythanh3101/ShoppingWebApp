@@ -15,6 +15,13 @@ namespace ShoppingWebApp.Application.AutoMapper
             CreateMap<ProductCategory, ProductCategoryViewModel>();
             CreateMap<Function, FunctionViewModel>();
             CreateMap<Product, ProductViewModel>();
+
+            CreateMap<Function, FunctionViewModel>();
+            CreateMap<AppUser, AppUserViewModel>();
+            CreateMap<AppRole, AppRoleViewModel>();
+
+            CreateMap<Announcement, AnnouncementViewModel>().MaxDepth(2);
+
         }
     }
 }

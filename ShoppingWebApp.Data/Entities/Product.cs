@@ -19,7 +19,6 @@ namespace ShoppingWebApp.Data.Entities
            ProductTags = new List<ProductTag>();
         }
 
-
         public Product(string name, int categoryId, string thumbnailImage,
             decimal price, decimal originalPrice, decimal? promotionPrice,
             string description, string content, bool? homeFlag, bool? hotFlag,

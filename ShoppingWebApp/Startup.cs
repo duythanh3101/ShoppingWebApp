@@ -100,6 +100,10 @@ namespace ShoppingWebApp
             services.AddTransient<IProductCategoryService, ProductCategoryService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IFunctionService, FunctionService>();
+            services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IAnnouncementService, AnnouncementService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
